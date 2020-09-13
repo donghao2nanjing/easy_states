@@ -1,0 +1,5 @@
+state,number,level,status.bits.check_by,period,valid_time_or_cnt,recover_time_or_cnt,valid_threshold,recover_threshold,status.bits.valid,status.bits.masked,status.bits.recoverable,comment
+ov1,1,LEVEL_STATE,PERIOD_CHECK,10,50,100,5,4,0,0,1,over voltage state monitor
+ov2,2,LEVEL_STATE,PERIOD_CHECK,10,50,100,5,4,0,1,1,over voltage state monitor
+ov3,3,LEVEL_STATE,PERIOD_CHECK,10,50,100,5,4,0,0,0,over voltage state monitor
+uv1,4,LEVEL_ALARM,COUNT_CHECK,10,2,3,-5,-4,0,0,1,under voltage state monitor

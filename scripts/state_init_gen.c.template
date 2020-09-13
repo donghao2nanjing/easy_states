@@ -1,0 +1,7 @@
+#include "state.h" 
+
+/* decalaration of states */ 
+
+void state_init(void){
+    /* generated code for state initialization */
+}
