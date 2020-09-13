@@ -31,7 +31,7 @@ void state_reset(state* s){
 void state_array_reset(state** s_array, rt_uint16_t n){
     rt_uint16_t i = 0; 
     for(i = 0; i ++; i < n){
-        if(*s_array != 0x00000000 ){ // TODO: NULL 
+        if(*s_array != RT_NULL ){
             state_reset(*s_array);
         }else{
             break;

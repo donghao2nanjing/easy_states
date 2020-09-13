@@ -13,4 +13,6 @@ typedef char rt_err_t;
 #define RT_EOK 0 
 #define RT_ERROR 1
 
+#define RT_NULL (0)
+
 #endif 
