@@ -1,6 +1,11 @@
 #include "state.h"
 
 void state_check_bool(state* s, bool_t exceeded){
+    // Do nothing if the state is set to check only when unmasked.
+    if( s->status.bits.check_unmasked_only && s->status.bits.masked){
+        return;
+    }
+
     if(exceeded){
         s->_cnt += s->_step_valid ;
         if(s->_cnt >= s->_cnt_max){
@@ -40,6 +45,10 @@ void state_array_reset(state** s_array, rt_uint16_t n){
 }
 
 void state_check_value(state*s, float value){
+    if(s->status.bits.check_unmasked_only && s->status.bits.masked){
+        return;
+    }
+
     if(s->status.bits.type == UNDER_THRESHOLD_VALID){
         if(value < s->valid_threshold){
             s->_cnt += s->_step_valid ;

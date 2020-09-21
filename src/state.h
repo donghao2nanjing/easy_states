@@ -27,7 +27,7 @@ typedef union state_status{
         rt_uint8_t valid : 1 ;  // if the state is triggered valid.
         rt_uint8_t _valid : 1 ; 
         rt_uint8_t masked : 1 ; 
-        rt_uint8_t check_unmasked_only : 1 ;  // the state is checked only when unmasked. // TODO
+        rt_uint8_t check_unmasked_only : 1 ;  // the state is checked only when unmasked. 
         rt_uint8_t recoverable : 1 ; // if the state is recoverable.
         rt_uint8_t type : 1 ; // 0: under threshold to trigger; 1: over threshold to trigger.
         rt_uint8_t check_by: 1 ; // 0: trigger by periodical check; 1: trigger by count
