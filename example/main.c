@@ -1,9 +1,6 @@
 #include "stdio.h"
-#include "../src/state.h"
+#include "state_declaration.h"
 #include "stdlib.h"
-
-extern state ov1, ov2, ov3;
-extern state uv1, uv2; 
 
 int main(void){
     float t, y1, y2 ; 

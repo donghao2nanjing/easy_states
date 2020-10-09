@@ -14,7 +14,9 @@ import math
 
 csv_config_path = "../example/state.csv"
 template_path = "state_init_gen.c.template"
+header_template_path = "state_declaration.h.template"
 output_cfile_path = "../example/state_init.c"
+output_headerfile_path = "../example/state_declaration.h"
 
 df = pd.read_csv(csv_config_path, sep=',', header=0)
 
@@ -106,23 +108,13 @@ for idx, row in df.iterrows():
 # In[5]:
 
 
-states_declaration_list = [] 
-for idx, row in df.iterrows():
-    states_declaration_list.append("state {} ;\n".format(row['state']))
-
-
-# In[6]:
-
-
-f_template = open(template_path, 'r')
-existed_lines = f_template.readlines()
-
 def generate_from_template(list_template_lines, inserted_lines, position_line):
     index = -1 
     for idx, line in enumerate(list_template_lines):
         # find the position to insert code 
         if position_line in line:
             index = idx 
+            break
     
     if index == -1 :
         return list_template_lines # do not insert anything 
@@ -130,6 +122,35 @@ def generate_from_template(list_template_lines, inserted_lines, position_line):
     return list_template_lines[:index+1] + inserted_lines + list_template_lines[index+1:]
 
 
+# In[6]:
+
+
+states_declaration_list = [] 
+states_header_declaration_list = [] 
+
+for idx, row in df.iterrows():
+    states_declaration_list.append("state {} ;\n".format(row['state']))
+    
+for idx, row in df.iterrows():
+    states_header_declaration_list.append("extern state {} ;\n".format(row['state']))
+
+
+# In[7]:
+
+
+f_header_template = open(header_template_path, 'r')
+header_existed_lines = f_header_template.readlines()
+
+header_existed_lines = generate_from_template(header_existed_lines, states_header_declaration_list, "states defined in csv file")
+for line in header_existed_lines:
+    print(line)
+
+
+# In[8]:
+
+
+f_template = open(template_path, 'r')
+existed_lines = f_template.readlines()
 
 existed_lines = generate_from_template(existed_lines, states_gen_list, 'generated code for state initialization')
 existed_lines = generate_from_template(existed_lines, states_declaration_list, 'decalaration of states')
@@ -138,11 +159,13 @@ for line in existed_lines:
     print(line)
 
 
-# In[7]:
+# In[9]:
 
 
 with open(output_cfile_path, 'w') as f : 
     f.writelines(existed_lines)
+with open(output_headerfile_path, 'w') as f: 
+    f.writelines(header_existed_lines)
 
 
 # In[ ]:

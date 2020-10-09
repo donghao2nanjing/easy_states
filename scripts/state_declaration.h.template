@@ -1,0 +1,10 @@
+#ifndef STATE_DECLARATION_H
+#define STATE_DECLARATION_H
+
+#include "state.h"
+
+extern void state_init(void);
+
+/* states defined in csv file */
+
+#endif
