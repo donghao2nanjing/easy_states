@@ -48,7 +48,7 @@ Steps:
     ```bash
     cd ../example
     make
-    ./main.exe
+    ./main.exe > state.txt
     ```
 
 4. Plot the results by running see_results.m.
